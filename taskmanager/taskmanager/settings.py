@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'tasks',
+    'users',
     
     'rest_framework',
     'rest_framework_simplejwt',
