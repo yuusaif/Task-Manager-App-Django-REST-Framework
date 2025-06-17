@@ -26,7 +26,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     user= UserSerializer(read_only=True)
     class Meta:
         model = Profile
-        fields = ('bio')
+        fields = '__all__'
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):

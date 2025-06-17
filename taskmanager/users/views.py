@@ -21,7 +21,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
 class ProfileView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
-    authentication_classes = [JWTAuthentication]
 
     def get_object(self):
         return Profile.objects.get_or_create(user=self.request.user)[0]
