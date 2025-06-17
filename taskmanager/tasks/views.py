@@ -31,7 +31,17 @@ class TaskUpdateView(UserTaskBaseView, generics.UpdateAPIView):
         queryset = self.get_queryset()
         return get_object_or_404(queryset, pk=self.kwargs['pk'])
 
-class TaskDeleteView(TaskUpdateView, generics.DestroyAPIView):
+class TaskDeleteView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.filter(user = self.request.user)
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk=self.kwargs['pk'])
+
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
