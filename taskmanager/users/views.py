@@ -1,4 +1,4 @@
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import ProfileSerializer, MyTokenObtainPairSerializer, RegisterSerializer
 from rest_framework import generics, status
 from .models import Profile
@@ -15,10 +15,11 @@ class RegisterView(generics.CreateAPIView):
 
 # JWT login with user info
 class MyTokenObtainPairView(TokenObtainPairView):
+    permission_classes = [AllowAny]
     serializer_class = MyTokenObtainPairSerializer
 
 # Read or Update Profile
-class ProfileView(generics.RetrieveUpdateAPIView):
+class ProfileReadUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
 
